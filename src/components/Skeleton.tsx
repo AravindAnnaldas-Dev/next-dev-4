@@ -1,12 +1,9 @@
 import React from "react";
 
-const Skeleton = ({ key }: { key: number }) => {
+const Skeleton = () => {
   return (
     <>
-      <div
-        key={key}
-        className="py-2 px-3 border-0 border-b border-[#cccccc] flex flex-col items-start justify-center gap-[6px]"
-      >
+      <div className="py-2 px-3 border-0 border-b border-[#cccccc] flex flex-col items-start justify-center gap-[6px]">
         <div className="w-full flex justify-start gap-2 animate-pulse">
           <div className="h-5 rounded-[4px] bg-[#cccccc] w-10"></div>
           <div className="h-5 rounded-[4px] bg-[#cccccc] w-10"></div>

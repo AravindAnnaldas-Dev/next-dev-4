@@ -1,31 +1,36 @@
-"use client";
-
-import React, { useEffect, useState } from "react";
-import { data } from "../../data/data";
+import React from "react";
 import Skeleton from "../../components/Skeleton";
 
-const SkeletonPage = () => {
-  const [loading, setLoading] = useState(true);
+type Titem = {
+  postId: number;
+  id: number;
+  name: string;
+  email: string;
+  body: string;
+};
 
-  useEffect(() => {
-    const time = setTimeout(() => {
-      setLoading(false);
-    }, 3000);
-    return () => {
-      clearTimeout(time);
-    };
-  }, []);
+const SkeletonPage = async () => {
+  let data: Titem[] | null = null;
+
+  try {
+    const response = await fetch(
+      "https://jsonplaceholder.typicode.com/comments"
+    );
+    data = await response.json();
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
 
   return (
     <>
-      {loading ? (
+      {!data ? (
         <>
-          {data.map((_, index) => (
+          {[...Array(10)].map((_, index) => (
             <Skeleton key={index} />
           ))}
         </>
       ) : (
-        data.map((item) => (
+        data.map((item: Titem) => (
           <div
             key={item.id}
             className="py-2 px-3 border-0 border-b border-[#cccccc]"
